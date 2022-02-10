@@ -4,7 +4,59 @@ import axios from 'axios';
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+axios.get('https://api.github.com/users/reneetro')
+  .then(resp => {
+    console.log(resp);
+    
+    //Create card element and assign card class
+    const card = document.createElement('div');
+    card.classList.add('card');
+    
+    const cards = document.querySelector('.cards');
 
+    //Create and add content for user image and append to card
+    const userImage = document.createElement('img');
+    userImage.src = resp.data.avatar_url;
+    card.appendChild(userImage);
+
+    //Create and add content for name and append to card
+    const nameHolder = document.createElement('h1');
+    nameHolder.textContent = resp.data.name;
+    nameHolder.classList.add('name');
+    card.appendChild(nameHolder);
+
+    //Create and add content for username and append to card
+    const userHolder = document.createElement('h2');
+    userHolder.textContent = resp.data.login;
+    userHolder.classList.add('username');
+    card.appendChild(userHolder);
+
+    //Create and add content for location and append to card
+    const location = document.createElement('p');
+    location.textContent = `Location: ${resp.data.location}`;
+    card.appendChild(location);
+
+    //Create and add content for profile link and append to card
+    const profile = document.createElement('p');
+    profile.textContent = `Profile: ${resp.data.html_url}`;
+    card.appendChild(profile);
+
+    //Create and add content for followers and append to card
+    const followers = document.createElement('p');
+    followers.textContent = `Followers: ${resp.data.followers}`;
+    card.appendChild(followers);
+
+    //Create and add content for following and append to card
+    const following = document.createElement('p');
+    following.textContent = `Following: ${resp.data.following}`;
+    card.appendChild(following);
+    //Create and add content for bio and append to card
+    const bio = document.createElement('p');
+    bio.textContent = `Bio: ${resp.data.bio}`;
+    card.appendChild(bio);
+    
+    cards.appendChild(card);
+  })
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
